@@ -1,0 +1,38 @@
+Gesture-Control/
+│
+├── core/                         # Modules de détection et logique principale
+│   ├── __init__.py
+│   ├── hand_tracker.py       # Détection de la main (MediaPipe)
+│   ├── gesture_analyzer.py   # Analyse des gestes (règles simples)
+│   ├── cursor_controller.py  # Contrôle du curseur
+│   └── kalman_filter.py      # Filtrage pour lisser les mouvements
+│
+├── interface/                    # Interface graphique PyQt5
+│   ├── __init__.py
+│   ├── main_window.py        # Fenêtre principale
+│   └── video_thread.py       # Thread pour la capture vidéo
+│
+├── utils/                        # Outils annexes
+│   ├── __init__.py
+│   ├── logger.py             # Journalisation
+│   └── config_manager.py     # Gestion des fichiers de configuration
+│
+├── config/                       # Fichiers de configuration
+│   ├── settings.ini          # Paramètres de calibration, seuils
+│   └── faq.json              # Questions et réponses pour le FAQ
+│
+├── chatbot/                      # Module chatbot (FAQ)
+│   ├── __init__.py
+│   └── faq_engine.py         # Moteur de FAQ simple
+│
+├── main.py                       # Point d'entrée principal
+├── requirements.txt              # Dépendances Python
+└── README.md                     # Documentation
+
+
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install --upgrade pip
+pip install -r requirements.txt
+
+python main.py
