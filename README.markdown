@@ -13,7 +13,7 @@ Une application de contrôle gestuel utilisant MediaPipe et PyQt5 pour contrôle
 2. Créez un environnement virtuel et installez les dépendances :
    ```bash
    python -m venv venv
-   .\.venv\Scripts\activate
+   source venv/bin/activate  # Windows: venv\Scripts\activate
    pip install -r requirements.txt
    ```
 

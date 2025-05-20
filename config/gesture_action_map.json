@@ -1,0 +1,11 @@
+{
+    "MOVE": {"action": "move", "params": {}},
+    "DRAG": {"action": "drag", "params": {}},
+    "RIGHT_CLICK": {"action": "click", "params": {"button": "right"}},
+    "LEFT_CLICK": {"action": "click", "params": {"button": "left"}},
+    "DOUBLE_CLICK": {"action": "double_click", "params": {}},
+    "SCROLL_UP": {"action": "scroll", "params": {"value": 100}},
+    "SCROLL_DOWN": {"action": "scroll", "params": {"value": -100}},
+    "ZOOM_IN": {"action": "hotkey", "params": {"keys": ["ctrl", "+"]}},
+    "ZOOM_OUT": {"action": "hotkey", "params": {"keys": ["ctrl", "-"]}}
+}
