@@ -1,7 +1,7 @@
 class GestureClassifier:
     def __init__(self):
         """Initialise le classificateur de gestes."""
-        self.gesture_priority = ['DOUBLE_CLICK', 'RIGHT_CLICK', 'LEFT_CLICK', 'DRAG', 
+        self.gesture_priority = ['DOUBLE_CLICK', 'LEFT_CLICK', 'RIGHT_CLICK', 'DRAG', 
                                 'SCROLL_UP', 'SCROLL_DOWN', 'ZOOM_IN', 'ZOOM_OUT', 'MOVE']
         
     def classify(self, gestures):

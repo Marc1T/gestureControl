@@ -1,64 +1,19 @@
-1. Déplacement du curseur (Mode Main)
-Geste : Lever l'index de la main droite (autres doigts repliés).
-Fonctionnement :
-MediaPipe Hands détecte la position de l'extrémité de l'index (landmark 8).
-La position est mappée à l'écran via la calibration (quatre points), et PyAutoGUI déplace le curseur en conséquence.
-Le lissage (filtre de Kalman) assure des mouvements fluides, même avec des gestes légèrement tremblants.
-Utilité :
-Accessibilité : Permet aux utilisateurs à mobilité réduite de naviguer sur l'écran sans souris.
-Médical : Contrôle précis pour les chirurgiens parcourant des images (ex. IRM).
-Éducation : Enseignants déplaçant le curseur dans des diaporamas.
-Exemple : Lever l'index devant la webcam pour déplacer le curseur sur un document.
-2. Clic gauche (Mode Main)
-Geste : Lever le majeur de la main droite (autres doigts repliés).
-Fonctionnement :
-MediaPipe détecte le majeur levé (landmark 12).
-Après une détection stable (ex. 0.5s pour éviter les clics accidentels), PyAutoGUI exécute un clic gauche.
-Utilité :
-Accessibilité : Remplace le clic pour les personnes ne pouvant utiliser une souris.
-Professionnel : Sélection d'options dans des logiciels (ex. pendant une présentation).
-Grand public : Interaction avec des applications courantes (ex. cliquer sur un lien).
-Exemple : Lever le majeur pour ouvrir une application.
-3. Clic droit (Mode Main)
-Geste : Former un signe "OK" avec la main droite (pouce touchant l'index, autres doigts levés).
-Fonctionnement :
-MediaPipe détecte la configuration des doigts (landmarks 4, 8, et autres).
-PyAutoGUI exécute un clic droit après une détection stable.
-Utilité :
-Accessibilité : Accès aux menus contextuels pour les utilisateurs handicapés.
-Éducation : Enseignants ouvrant des options dans des logiciels éducatifs.
-Professionnel : Navigation dans des interfaces complexes (ex. logiciels médicaux).
-Exemple : Former le signe OK pour ouvrir un menu contextuel.
-4. Défilement (Mode Main)
-Geste : Lever l'auriculaire de la main droite (autres doigts repliés).
-Fonctionnement :
-MediaPipe détecte l'auriculaire levé (landmark 20).
-Le mouvement vertical de l'auriculaire (détecté via les coordonnées y) est traduit par PyAutoGUI en un défilement (scroll up/down).
-Le geste est conçu pour éviter les conflits avec d'autres gestes (ex. clic, déplacement).
-Utilité :
-Accessibilité : Permet aux personnes handicapées de parcourir des documents longs.
-Médical : Défilement sans contact dans des dossiers médicaux ou images.
-Éducation : Enseignants faisant défiler des diapositives ou des PDF.
-Unique : Ce geste est particulièrement intuitif et rarement utilisé dans d'autres systèmes, renforçant l'ergonomie.
-Exemple : Lever l'auriculaire et le bouger vers le haut pour défiler vers le bas dans une page web.
-5. Zoom (Mode Main)
-Geste : Pincer le pouce et l'index de la main droite (rapprocher ou écarter).
-Fonctionnement :
-MediaPipe détecte la distance entre les extrémités du pouce (landmark 4) et de l'index (landmark 8).
-Rapprocher les doigts déclenche un zoom arrière (Ctrl + molette bas via PyAutoGUI), écarter déclenche un zoom avant (Ctrl + molette haut).
-La sensibilité est ajustée pour éviter des zooms accidentels.
-Utilité :
-Accessibilité : Zoom sur des textes ou images pour les utilisateurs malvoyants.
-Médical : Agrandissement précis d'images médicales (ex. radiographies).
-Éducation : Zoom sur des graphiques ou cartes dans des cours.
-Exemple : Pincer les doigts pour zoomer sur une image dans un logiciel.
-6. Déplacement du curseur (Mode Nez)
-Geste : Bouger la pointe du nez (aucune main requise).
-Fonctionnement :
-MediaPipe Face Mesh détecte la position de la pointe du nez (landmark 1).
-La position est mappée à l'écran via la calibration, et PyAutoGUI déplace le curseur.
-Le lissage (filtre de Kalman) réduit les mouvements brusques.
-Utilité :
-Accessibilité : Idéal pour les personnes paralysées ou sans usage des mains (ex. tétraplégiques).
-Médical : Contrôle sans contact dans des environnements stériles.
-Éducation : Étudiants handicapés naviguant sur des plateformes e-learning.
+Tester les nouveaux gestes :
+Préparer :
+Pièce bien éclairée, webcam à 50-100 cm.
+Ouvre un navigateur ou une application pour tester (ex. page web pour défilement, dossier pour clics).
+Mode main :
+Déplacement : Main ouverte, déplace-la. Vérifie si le curseur suit.
+Clic gauche : Pince pouce et index. Teste sur un bouton.
+Clic droit : Pince pouce et majeur. Vérifie le menu contextuel.
+Double-clic : Pince pouce-index deux fois. Teste sur une icône.
+Glisser-déposer : Ferme le poing, déplace, ouvre la main. Teste avec un fichier.
+Défilement : Lève index et majeur, déplace verticalement. Teste dans un navigateur.
+Zoom : Écarte/rapproche les index des deux mains. Teste dans une visionneuse d’images.
+Mode nez :
+Clique sur "Passer au mode Nez".
+Clic gauche : Cligne de l’œil. Teste sur un bouton.
+Défilement : Hoche la tête. Teste dans un navigateur.
+Mouvement : Déplace la tête. Vérifie si le curseur suit.
+Chatbot :
+Pose des questions comme "Comment défiler ?" ou "Quels sont les gestes ?".

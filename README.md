@@ -1,66 +1,78 @@
-Gesture-Control
-Un système de contrôle gestuel pour manipuler le curseur d'un ordinateur à l'aide de gestes de la main ou du nez, conçu pour améliorer l'accessibilité.
-Fonctionnalités
+# Gesture-Control
 
-Mode Main : Contrôle du curseur avec des gestes comme déplacement (index levé), glisser-déposer (poing fermé), clics (OK, majeur levé), double-clic (OK x2), défilement (auriculaire levé), zoom (pincer/écarter pouce-index).
-Mode Nez : Contrôle du curseur en suivant la pointe du nez (sans gestes pour l'instant).
-Calibration : Mappage précis des mouvements à l'écran.
-Lissage : Filtre de Kalman pour des mouvements fluides.
-Interface PyQt5 : Interface graphique avec vidéo en temps réel, boutons, curseurs, et chatbot.
-Chatbot : Répond aux questions fréquentes sur l'utilisation.
+Un système de contrôle gestuel utilisant MediaPipe, OpenCV, et PyQt5 pour contrôler le curseur de l'ordinateur via des gestes de la main ou des mouvements du nez. Idéal pour améliorer l'accessibilité et offrir une alternative intuitive à la souris.
 
-Prérequis
+## Fonctionnalités
+- **Mode main** : Contrôle via gestes de la main (déplacement, clics, défilement, zoom).
+- **Mode nez** : Contrôle via mouvements de la tête (suivi de la pointe du nez).
+- **Calibration** : Alignement précis des mouvements avec l'écran.
+- **Interface graphique** : Fenêtre PyQt5 avec flux vidéo en temps réel et commandes.
+- **Chatbot intégré** : Répond aux questions sur l'utilisation (ex. "Comment défiler ?").
+- **Personnalisation** : Gestes modifiables via `config/user_gesture_map.json`.
 
-Python 3.7-3.11
-Webcam
-Dépendances listées dans requirements.txt
+## Prérequis
+- Python 3.8+
+- Une webcam
+- Système d'exploitation : Windows, macOS, ou Linux
 
-Installation
-
-Clonez le dépôt :git clone <url-du-dépôt>
-cd Gesture-Control
-
-
-Créez un environnement virtuel :python -m venv venv
-source venv/bin/activate  # Linux/Mac
-.\venv\Scripts\activate  # Windows
+## Installation
+1. Clonez le dépôt :
+   ```bash
+   git clone https://github.com/votre-utilisateur/gesture-control.git
+   cd gesture-control
 
 
-Installez les dépendances :pip install -r requirements.txt
+2. Créez un environnement virtuel :
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # Linux/macOS
+    .\venv\Scripts\Activate.ps1  # Windows
 
 
-Lancez l'application :python main.py
+3. Installez les dépendances :
+    ```bash
+    pip install -r requirements.txt
+
+
+4. Lancez l'application :
+    ```bash
+    python main.py
 
 
 
-Utilisation
+## Utilisation
 
-Cliquez sur "Démarrer" pour activer le contrôle.
-Utilisez "Calibrer" pour mapper les mouvements aux coins de l'écran.
-Basculez entre mode main et nez avec "Passer au mode Nez".
-Ajustez les seuils de clic et le lissage via les curseurs.
-Posez des questions au chatbot (ex. "Comment défiler ?").
+1. Démarrer : Cliquez sur "Démarrer" pour activer le contrôle.
+2. Calibrer : Cliquez sur "Calibrer" et pointez vers les quatre coins de l'écran.
+3. Mode : Basculez entre mode main et mode nez avec "Passer au mode Nez".
+4. Gestes :
+* Main ouverte : Déplacer le curseur.
+* Pincer pouce-index : Clic gauche.
+* Pincer pouce-majeur : Clic droit.
+* Pincer pouce-index x2 : Double-clic.
+* Poing fermé : Glisser-déposer.
+* Deux doigts levés : Défilement.
+* Deux mains, écarter/rapprocher index : Zoom avant/arrière.
+* Mode nez : Clignement d'œil (clic), hochement de tête (défilement).
 
-Gestes (Mode Main)
 
-Déplacement : Levez l'index, repliez les autres doigts, déplacez la main.
-Glisser-déposer : Fermez la main en poing, déplacez.
-Clic droit : Faites le geste "OK" (pouce touche index).
-Clic gauche : Levez le majeur, repliez les autres doigts.
-Double-clic : Faites "OK" deux fois rapidement.
-Défilement : Levez l'auriculaire, repliez les autres doigts, déplacez verticalement.
-Zoom avant : Pincez pouce et index.
-Zoom arrière : Écartez pouce et index.
+5. Chatbot : Posez des questions comme "Comment défiler ?".
 
-Structure du projet
+### Structure du projet
 
-core/ : Logique principale (suivi, analyse des gestes, contrôle).
-interface/ : Interface PyQt5.
-utils/ : Calibration et lissage.
-config/ : Paramètres et mappage des gestes.
-chatbot/ : Assistance utilisateur via FAQ.
+core/ : Logique de suivi, analyse et contrôle.
+interface/ : Interface graphique PyQt5.
+utils/ : Outils comme le calibrage et le filtre de Kalman.
+config/ : Fichiers de configuration (seuils, mappage des gestes).
+chatbot/ : Système de FAQ pour l'assistance utilisateur.
 
-Contribution
-Les contributions sont bienvenues ! Ouvrez une issue ou une pull request pour proposer des améliorations.
-Licence
-MIT
+## Contribution
+
+1. Forkez le dépôt.
+2. Créez une branche : git checkout -b ma-fonctionnalité.
+3. Committez vos changements : git commit -m "Ajout de ma fonctionnalité".
+4. Poussez : git push origin ma-fonctionnalité.
+5. Ouvrez une Pull Request.
+
+## Licence
+MIT License

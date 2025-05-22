@@ -35,7 +35,7 @@ class VideoThread(QThread):
         self.calibrating = True
         self.calibration_mode = mode
         self.calibration_points = []
-        self.calibration_step_updated.emit(0)  # Première étape
+        self.calibration_step_updated.emit(0)
         
     def run(self):
         """Boucle principale du thread vidéo."""
@@ -58,22 +58,23 @@ class VideoThread(QThread):
     def handle_calibration(self, frame):
         """Gère le processus de calibration avec feedback visuel."""
         if self.calibration_mode == "hand":
-            landmarks, _ = self.hand_tracker.process(frame)
+            landmarks, handedness = self.hand_tracker.process(frame)
             if landmarks:
-                features = self.feature_extractor.extract_hand_features(landmarks[0].landmark)
-                if features:
-                    x, y = features['index_pos']
-                    # Dessiner un cercle pour le feedback visuel
-                    cv2.circle(frame, (int(x * frame.shape[1]), int(y * frame.shape[0])), 10, (0, 255, 0), -1)
-                    self.calibration_points.append(features['index_pos'])
-                    self.calibration_step_updated.emit(len(self.calibration_points))
+                for i, hand_landmarks in enumerate(landmarks):
+                    if handedness and handedness[i].classification[0].label == "Right":
+                        features = self.feature_extractor.extract_hand_features(hand_landmarks.landmark)
+                        if features:
+                            x, y = features['palm_pos']
+                            cv2.circle(frame, (int(x * frame.shape[1]), int(y * frame.shape[0])), 10, (0, 255, 0), -1)
+                            self.calibration_points.append(features['palm_pos'])
+                            self.calibration_step_updated.emit(len(self.calibration_points))
+                        break
         elif self.calibration_mode == "nose":
             face_landmarks = self.face_tracker.process(frame)
             if face_landmarks:
                 features = self.feature_extractor.extract_face_features(face_landmarks[0].landmark)
                 if features:
                     x, y = features['nose_pos']
-                    # Dessiner un cercle pour le feedback visuel
                     cv2.circle(frame, (int(x * frame.shape[1]), int(y * frame.shape[0])), 10, (0, 255, 0), -1)
                     self.calibration_points.append(features['nose_pos'])
                     self.calibration_step_updated.emit(len(self.calibration_points))
@@ -89,26 +90,29 @@ class VideoThread(QThread):
         if self.control_mode == "hand":
             landmarks, handedness = self.hand_tracker.process(frame)
             if landmarks:
-                for i, hand_landmarks in enumerate(landmarks):
-                    if not handedness or handedness[i].classification[0].label == "Right":
-                        features = self.feature_extractor.extract_hand_features(hand_landmarks.landmark)
-                        if features:
-                            gestures = self.gesture_analyzer.analyze(features)
-                            gesture = self.gesture_classifier.classify(gestures)
-                            self.cursor_controller.update(features['index_pos'][0], 
-                                                       features['index_pos'][1], 
-                                                       gesture)
-                            self.gesture_detected.emit(gesture if gesture else "NONE")
-                        break
+                # Passer toutes les mains et handedness pour les gestes à deux mains
+                features = self.feature_extractor.extract_hand_features(
+                    landmarks[0].landmark if landmarks else None, 
+                    landmarks,
+                    handedness
+                )
+                if features:
+                    gestures = self.gesture_analyzer.analyze(features, self.control_mode)
+                    gesture = self.gesture_classifier.classify(gestures)
+                    pos = features['palm_pos'] if 'palm_pos' in features else (0, 0)
+                    self.cursor_controller.update(pos[0], pos[1], gesture)
+                    self.gesture_detected.emit(gesture if gesture else "NONE")
         elif self.control_mode == "nose":
             face_landmarks = self.face_tracker.process(frame)
             if face_landmarks:
                 features = self.feature_extractor.extract_face_features(face_landmarks[0].landmark)
                 if features:
+                    gestures = self.gesture_analyzer.analyze(features, self.control_mode)
+                    gesture = self.gesture_classifier.classify(gestures)
                     self.cursor_controller.update(features['nose_pos'][0], 
                                                features['nose_pos'][1], 
-                                               None)
-                    self.gesture_detected.emit("NONE")
+                                               gesture)
+                    self.gesture_detected.emit(gesture if gesture else "NONE")
                                                
     def stop(self):
         """Arrête le thread et libère la caméra."""

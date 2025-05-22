@@ -3,13 +3,14 @@ import json
 import os
 
 class InputMapper:
-    def __init__(self, config_path="config/gesture_action_map.json"):
+    def __init__(self, config_path="config/gesture_action_map.json", user_config_path="config/user_gesture_map.json"):
         """Initialise le mappage des gestes aux actions système."""
-        self.gesture_map = self.load_gesture_map(config_path)
+        self.gesture_map = self.load_gesture_map(config_path, user_config_path)
         self.dragging = False
         
-    def load_gesture_map(self, config_path):
-        """Charge le mappage des gestes depuis un fichier JSON."""
+    def load_gesture_map(self, config_path, user_config_path):
+        """Charge le mappage des gestes depuis les fichiers JSON."""
+        # Charger le mappage par défaut
         if not os.path.exists(config_path):
             default_map = {
                 "MOVE": {"action": "move", "params": {}},
@@ -24,9 +25,17 @@ class InputMapper:
             }
             with open(config_path, 'w') as f:
                 json.dump(default_map, f, indent=4)
-            return default_map
-        with open(config_path, 'r') as f:
-            return json.load(f)
+        else:
+            with open(config_path, 'r') as f:
+                default_map = json.load(f)
+                
+        # Charger le mappage utilisateur (surcharge)
+        if os.path.exists(user_config_path):
+            with open(user_config_path, 'r') as f:
+                user_map = json.load(f)
+            default_map.update(user_map)
+            
+        return default_map
             
     def execute(self, gesture, last_click):
         """Exécute l'action associée au geste."""

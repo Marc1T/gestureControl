@@ -7,8 +7,8 @@ class FAQEngine:
             "comment démarrer": "Cliquez sur 'Démarrer' pour activer le contrôle gestuel.",
             "comment calibrer": "Cliquez sur 'Calibrer' et pointez vers les quatre coins de l'écran.",
             "mode nez": "Utilisez le bouton 'Passer au mode Nez' pour contrôler avec le nez.",
-            "gestes": "Les gestes incluent : déplacement (index levé), glisser-déposer (poing fermé), clic droit (geste OK), clic gauche (majeur levé), double-clic (OK rapide x2), défilement (auriculaire levé et déplacer), zoom avant (pincer pouce-index), zoom arrière (écarter pouce-index).",
-            "comment défiler": "Levez l'auriculaire, repliez les autres doigts, et déplacez la main vers le haut ou le bas."
+            "gestes": "Les gestes incluent : déplacement (main ouverte), glisser-déposer (poing fermé), clic gauche (pincer pouce-index), clic droit (pincer pouce-majeur), double-clic (pincer pouce-index x2), défilement (deux doigts levés et déplacer), zoom avant (écarter index des deux mains), zoom arrière (rapprocher index des deux mains). En mode nez : clic (clignement d'œil), défilement (hochement de tête).",
+            "comment défiler": "Levez l'index et le majeur, repliez les autres doigts, et déplacez la main vers le haut ou le bas. En mode nez, hochez la tête."
         }
         self.response_generator = ResponseGenerator()
         

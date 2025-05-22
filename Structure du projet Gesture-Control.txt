@@ -1,34 +1,33 @@
 Gesture-Control/
-│
-├── core/                         # Modules de détection et logique principale
-│   ├── __init__.py
-│   ├── hand_tracker.py       # Détection de la main (MediaPipe)
-│   ├── gesture_analyzer.py   # Analyse des gestes (règles simples)
-│   ├── cursor_controller.py  # Contrôle du curseur
-│   └── kalman_filter.py      # Filtrage pour lisser les mouvements
-│
-├── interface/                    # Interface graphique PyQt5
-│   ├── __init__.py
-│   ├── main_window.py        # Fenêtre principale
-│   └── video_thread.py       # Thread pour la capture vidéo
-│
-├── utils/                        # Outils annexes
-│   ├── __init__.py
-│   ├── logger.py             # Journalisation
-│   └── config_manager.py     # Gestion des fichiers de configuration
-│
-├── config/                       # Fichiers de configuration
-│   ├── settings.ini          # Paramètres de calibration, seuils
-│   └── faq.json              # Questions et réponses pour le FAQ
-│
-├── chatbot/                      # Module chatbot (FAQ)
-│   ├── __init__.py
-│   └── faq_engine.py         # Moteur de FAQ simple
-│
-├── main.py                       # Point d'entrée principal
-├── requirements.txt              # Dépendances Python
-└── README.md                     # Documentation
-
+├── main.py                    # Point d'entrée principal
+├── requirements.txt          # Dépendances du projet
+├── README.md                 # Documentation du projet
+├── core/
+│   ├── __init__.py           # Fichier vide pour rendre le dossier un module
+│   ├── hand_tracker.py       # Gestion du suivi des mains avec MediaPipe
+│   ├── face_tracker.py       # Gestion du suivi du visage avec MediaPipe
+│   ├── feature_extractor.py  # Extraction des caractéristiques des landmarks (modifié pour nouveaux gestes)
+│   ├── gesture_analyzer.py   # Analyse et classification des gestes (modifié pour nouveaux gestes)
+│   ├── gesture_classifier.py # Classification finale des gestes (inchangé)
+│   ├── cursor_controller.py  # Contrôle du curseur et actions système (inchangé)
+│   └── input_mapper.py       # Mappage des gestes aux actions (modifié pour nouveaux gestes)
+├── interface/
+│   ├── __init__.py           # Fichier vide pour rendre le dossier un module
+│   ├── main_window.py        # Interface graphique principale (modifié pour main dominante)
+│   ├── video_thread.py       # Thread pour le traitement vidéo en temps réel (modifié pour nouveaux gestes et calibrage)
+│   └── calibrator_dialog.py  # Fenêtre de dialogue pour le calibrage (modifié pour améliorations)
+├── utils/
+│   ├── __init__.py           # Fichier vide pour rendre le dossier un module
+│   ├── calibrator.py         # Gestion du calibrage (modifié pour transformation homographique)
+│   └── kalman_filter.py      # Filtre de Kalman pour lisser les mouvements (inchangé)
+├── chatbot/
+│   ├── __init__.py           # Fichier vide pour rendre le dossier un module
+│   ├── faq_engine.py         # Moteur de FAQ du chatbot (inchangé)
+│   ├── response_generator.py # Génération des réponses du chatbot (inchangé)
+│   └── faq_data.json         # Données des questions/réponses (inchangé)
+└── config/
+    ├── settings.ini          # Paramètres de configuration (inchangé)
+    └── gesture_action_map.json # Mappage des gestes aux actions (modifié pour nouveaux gestes)
 
 python -m venv venv
 .\venv\Scripts\Activate.ps1

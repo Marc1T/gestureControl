@@ -35,8 +35,8 @@ class CursorController:
         smooth_y = current_y + (target_y - current_y) * self.smooth_factor
         pyautogui.moveTo(smooth_x, smooth_y)
         
-        # Exécuter le geste (si mode main)
-        if self.control_mode == "hand" and gesture:
+        # Exécuter le geste
+        if gesture:
             self.input_mapper.execute(gesture, self.last_click)
-            if gesture == 'CLICK':
+            if gesture in ['LEFT_CLICK', 'RIGHT_CLICK']:
                 self.last_click = time.time()

@@ -4,5 +4,5 @@ class ResponseGenerator:
         pass
         
     def generate(self, response):
-        """Génère une réponse (extensible pour NLP avancé)."""
+        """Génère une réponse formatée."""
         return response

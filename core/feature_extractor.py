@@ -1,54 +1,69 @@
+import numpy as np
+
 class FeatureExtractor:
     def __init__(self):
         """Initialise l'extracteur de caractéristiques."""
         pass
         
-    def extract_hand_features(self, landmarks):
+    def extract_hand_features(self, landmarks, multi_landmarks=None, multi_handedness=None):
         """Extrait les caractéristiques des landmarks de la main."""
-        if not landmarks:
+        if not landmarks and not multi_landmarks:
             return None
             
         features = {}
-        # Points clés : poignet (0), pouce (4), index (8), majeur (12), auriculaire (20)
+        if multi_landmarks and len(multi_landmarks) >= 2 and multi_handedness:  # Deux mains pour zoom
+            # Identifier main gauche et droite via handedness
+            left_hand = None
+            right_hand = None
+            for i, hand_landmarks in enumerate(multi_landmarks):
+                if i < len(multi_handedness) and multi_handedness[i].classification[0].label == "Left":
+                    left_hand = hand_landmarks.landmark
+                elif i < len(multi_handedness) and multi_handedness[i].classification[0].label == "Right":
+                    right_hand = hand_landmarks.landmark
+                    
+            if left_hand and right_hand:
+                left_index = left_hand[8]
+                right_index = right_hand[8]
+                features['index_distance'] = ((left_index.x - right_index.x) ** 2 + 
+                                            (left_index.y - right_index.y) ** 2) ** 0.5
+            else:
+                features['index_distance'] = None
+        else:
+            features['index_distance'] = None
+            
+        # Points clés pour une main (droite par défaut)
         wrist = landmarks[0]
         thumb_tip = landmarks[4]
         index_tip = landmarks[8]
         middle_tip = landmarks[12]
         ring_tip = landmarks[16]
         pinky_tip = landmarks[20]
-        index_mcp = landmarks[5]  # Articulation de base de l'index
-        middle_mcp = landmarks[9]  # Articulation de base du majeur
-        pinky_mcp = landmarks[17]  # Articulation de base de l'auriculaire
+        index_mcp = landmarks[5]
+        middle_mcp = landmarks[9]
         
-        # Distance pouce-index (pour clic droit, zoom)
+        # Distances pour pincements
         features['thumb_index_dist'] = ((thumb_tip.x - index_tip.x) ** 2 + 
                                       (thumb_tip.y - index_tip.y) ** 2) ** 0.5
-                                      
-        # Position y de l'auriculaire (pour défilement)
-        features['pinky_y'] = pinky_tip.y
-        
-        # État des doigts (levés ou repliés)
-        features['index_raised'] = index_tip.y < index_mcp.y
-        features['middle_raised'] = middle_tip.y < middle_mcp.y
-        features['pinky_raised'] = pinky_tip.y < pinky_mcp.y
-        features['other_fingers_folded'] = (ring_tip.y > landmarks[13].y and 
-                                         thumb_tip.y > landmarks[2].y and 
-                                         (not features['index_raised'] or not features['middle_raised'] or not features['pinky_raised']))
-                                         
-        # Poing fermé (pour glisser-déposer)
+        features['thumb_middle_dist'] = ((thumb_tip.x - middle_tip.x) ** 2 + 
+                                       (thumb_tip.y - middle_tip.y) ** 2) ** 0.5
+                                       
+        # État des doigts
+        features['open_hand'] = (index_tip.y < index_mcp.y and 
+                                middle_tip.y < middle_mcp.y and 
+                                ring_tip.y < landmarks[13].y and 
+                                pinky_tip.y < landmarks[17].y)
         features['fist'] = (features['thumb_index_dist'] < 0.1 and 
                            ring_tip.y > landmarks[13].y and 
                            pinky_tip.y > landmarks[17].y and 
                            index_tip.y > landmarks[6].y and 
                            middle_tip.y > landmarks[10].y)
-                           
-        # Geste OK (pouce-index proches, autres doigts levés)
-        features['ok_gesture'] = (features['thumb_index_dist'] < 0.05 and 
-                                ring_tip.y < landmarks[13].y and 
-                                pinky_tip.y < landmarks[17].y)
-                                
-        # Coordonnées de l'index pour le curseur
-        features['index_pos'] = (index_tip.x, index_tip.y)
+        features['two_fingers'] = (index_tip.y < index_mcp.y and 
+                                  middle_tip.y < middle_mcp.y and 
+                                  ring_tip.y > landmarks[13].y and 
+                                  pinky_tip.y > landmarks[17].y)
+                                  
+        # Position de la paume pour déplacement
+        features['palm_pos'] = ((wrist.x + index_tip.x) / 2, (wrist.y + index_tip.y) / 2)
         
         return features
         
@@ -58,8 +73,11 @@ class FeatureExtractor:
             return None
             
         features = {}
-        # Pointe du nez (landmark 1)
         nose_tip = landmarks[1]
+        left_eye_top = landmarks[159]
+        left_eye_bottom = landmarks[145]
         features['nose_pos'] = (nose_tip.x, nose_tip.y)
+        features['eye_dist'] = (left_eye_top.y - left_eye_bottom.y)
+        features['nose_y'] = nose_tip.y
         
         return features
