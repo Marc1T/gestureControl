@@ -6,7 +6,7 @@ Une application de contrôle gestuel utilisant MediaPipe et PyQt5 pour contrôle
 
 1. Clonez le dépôt :
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/Marc1T/gestureControl.git
    cd Gesture-Control
    ```
 
