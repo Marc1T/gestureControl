@@ -1,0 +1,9 @@
+{
+    "V_GEST": "move_cursor",
+    "FIST": "mouse_down",
+    "MID": "click",
+    "INDEX": "click_right",
+    "TWO_FINGER_CLOSED": "double_click",
+    "PINCH_MINOR": "Défilement horizontal(scroll)/vertical(scroll ou zoom)",
+    "PINCH_MAJOR": "Ajustement luminosité/volume"
+}

@@ -1,4 +1,118 @@
-{
-    "comment calibrer les gestes ?": "Placez votre main à 50 cm de la caméra et suivez les instructions à l'écran.",
-    "quels gestes sont supportés ?": "Vous pouvez utiliser un swipe gauche, droit, ou un poing fermé."
-}
+[
+    {
+        "question": "Comment démarrer la détection des gestes ?",
+        "answer": "Cliquez sur l'icône 'Démarrer' dans la barre d'outils ou utilisez le raccourci Ctrl+D. Assurez-vous qu'une caméra est connectée."
+    },
+    {
+        "question": "Comment arrêter la détection des gestes ?",
+        "answer": "Cliquez sur l'icône 'Arrêter' dans la barre d'outils. Cela mettra en pause la capture vidéo."
+    },
+    {
+        "question": "Comment changer de caméra ?",
+        "answer": "Dans l'onglet Vidéo, sélectionnez une autre caméra dans la liste déroulante 'Caméra'. La nouvelle caméra sera utilisée immédiatement."
+    },
+    {
+        "question": "Pourquoi la détection des gestes ne fonctionne pas ?",
+        "answer": "Vérifiez que l'éclairage est suffisant, que la caméra est bien connectée, et que les seuils de détection sont correctement configurés dans 'Paramètres'."
+    },
+    {
+        "question": "Comment afficher les landmarks des mains ?",
+        "answer": "Cochez la case 'Afficher landmarks' dans la barre d'outils pour voir les points de détection sur la vidéo."
+    },
+    {
+        "question": "Quels gestes sont pris en charge ?",
+        "answer": "Les gestes incluent : V_GEST (déplacer le curseur), FIST (clic maintenu), MID (clic gauche), INDEX (clic droit), TWO_FINGER_CLOSED (double clic), PINCH_MAJOR (volume/luminosité), PINCH_MINOR (défilement)."
+    },
+    {
+        "question": "Comment ajuster le volume ou la luminosité ?",
+        "answer": "Utilisez le geste PINCH_MAJOR (pouce+index de la main dominante). Déplacez la main vers le haut/bas pour le volume ou gauche/droite pour la luminosité."
+    },
+    {
+        "question": "Comment faire défiler une page ?",
+        "answer": "Utilisez le geste PINCH_MINOR (pouce+index de la main non dominante). Déplacez la main vers le haut/bas pour défiler verticalement ou gauche/droite pour défiler horizontalement."
+    },
+    {
+        "question": "Comment configurer la main dominante ?",
+        "answer": "Allez dans 'Paramètres' et sélectionnez 'Droite' ou 'Gauche' pour la main dominante. Redémarrez la détection pour appliquer."
+    },
+    {
+        "question": "Où trouver les logs de l'application ?",
+        "answer": "Les logs sont enregistrés dans 'logs/app.log'. Consultez ce fichier pour diagnostiquer les problèmes."
+    },
+    {
+        "question": "Pourquoi le curseur tremble-t-il ?",
+        "answer": "Le tremblement peut être dû à un mauvais éclairage ou à des seuils mal configurés. Essayez d'augmenter le seuil de détection dans 'Paramètres' ou vérifiez la caméra."
+    },
+    {
+        "question": "Comment accéder aux paramètres ?",
+        "answer": "Cliquez sur l'icône 'Paramètres' dans la barre d'outils pour ouvrir la fenêtre de configuration."
+    },
+    {
+        "question": "Que faire si l'application plante ?",
+        "answer": "Consultez 'logs/app.log' pour identifier l'erreur. Assurez-vous que toutes les dépendances sont installées et que la caméra fonctionne."
+    },
+    {
+        "question": "Comment tester si la caméra fonctionne ?",
+        "answer": "Démarrez la détection et vérifiez si le flux vidéo s'affiche dans l'onglet Vidéo. Si non, changez de caméra ou vérifiez la connexion."
+    },
+    {
+        "question": "Puis-je personnaliser les gestes ?",
+        "answer": "Oui, modifiez le fichier 'config/gestures.json' pour associer des gestes à des actions. Rechargez l'application après modification."
+    },
+    {
+        "question": "Comment zoomer/dézoomer ?",
+        "answer": "Utilisez le geste PINCH_MINOR (pincez votre main non dominante) et déplacez votre main vers l'avant pour zoomer, ou vers l'arrière pour dézoomer. La sensibilité est configurable dans les paramètres."
+    },
+    {
+        "question": "Pourquoi certains gestes ne sont-ils pas reconnus ?",
+        "answer": "Assurez-vous que votre main est bien visible par la caméra. Vous pouvez ajuster le 'seuil de détection' dans les paramètres pour améliorer la reconnaissance."
+    },
+    {
+        "question": "Comment quitter l'application ?",
+        "answer": "Cliquez sur l'icône 'Quitter' dans la barre d'outils ou utilisez le raccourci Ctrl+Q. L'application se fermera proprement."
+    },
+    {
+        "question": "L'application fonctionne-t-elle sans caméra ?",
+        "answer": "Non, une caméra est nécessaire pour la détection des gestes. L'application vérifie au démarrage si une caméra est disponible."
+    },
+    {
+        "question": "Comment mettre à jour les paramètres par défaut ?",
+        "answer": "Dans la fenêtre 'Paramètres', cliquez sur 'Par Défaut' pour restaurer les valeurs d'origine. Confirmez l'opération dans la boîte de dialogue."
+    },
+    {
+        "question": "Puis-je utiliser plusieurs caméras simultanément ?",
+        "answer": "Non, l'application ne supporte qu'une seule caméra à la fois. Vous pouvez changer de caméra dynamiquement dans l'onglet Vidéo."
+    },
+    {
+        "question": "Comment améliorer la précision de détection ?",
+        "answer": "1. Assurez-vous d'avoir un bon éclairage\n2. Positionnez-vous à 1-2 mètres de la caméra\n3. Augmentez le 'seuil de détection' dans les paramètres\n4. Calibrez la main dominante dans les paramètres"
+    },
+    {
+        "question": "Quelles sont les combinaisons de gestes possibles ?",
+        "answer": "Vous pouvez combiner certains gestes :\n- V_GEST + FIST : Déplacer en cliquant\n- PINCH_MAJOR + PINCH_MINOR : Ajuster volume et luminosité simultanément\nEssayez différentes combinaisons !"
+    },
+    {
+        "question": "Comment changer la langue de l'interface ?",
+        "answer": "Actuellement, l'application est uniquement en français. La version multilingue est prévue pour une future mise à jour."
+    },
+    {
+        "question": "L'application est-elle compatible avec les ordinateurs portables ?",
+        "answer": "Oui, elle fonctionne parfaitement avec les webcams intégrées aux ordinateurs portables. Assurez-vous simplement que la caméra est correctement orientée."
+    },
+    {
+        "question": "Comment signaler un bug ou suggérer une amélioration ?",
+        "answer": "Visitez notre dépôt GitHub à [lien_github] pour ouvrir une 'issue' décrivant le problème ou votre suggestion. Nous apprécions votre contribution !"
+    },
+    {
+        "question": "Existe-t-il des raccourcis clavier ?",
+        "answer": "Oui :\n- Ctrl+D : Démarrer la détection\n- Ctrl+S : Arrêter la détection\n- Ctrl+Q : Quitter l'application"
+    },
+    {
+        "question": "Comment calibrer la sensibilité du curseur ?",
+        "answer": "Allez dans 'Paramètres > Sensibilité'. Ajustez les curseurs 'Vitesse' et 'Précision' selon vos préférences. Testez en temps réel dans l'onglet Vidéo."
+    },
+    {
+        "question": "L'application fonctionne-t-elle en arrière-plan ?",
+        "answer": "Oui, vous pouvez minimiser l'application et continuer à utiliser les gestes. Un icône dans la barre système indique que la détection est active."
+    }
+]
