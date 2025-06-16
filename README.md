@@ -64,9 +64,9 @@ pip install -r requirements.txt
 python main.py
 ```
 
-### Télécharger l'exécutable
+<!--### Télécharger l'exécutable
 [![Télécharger l'exécutable](https://img.shields.io/badge/Download-Executable-important)](https://github.com/Marc1T/gestureControl/releases)
-
+-->
 ## Démonstration 🎥
 
 https://github.com/Marc1T/gestureControl/assets/123456789/demo-gesture-control
