@@ -137,10 +137,10 @@ Pour toute question ou suggestion, contactez-moi :
 ---
 
 **GestureMouseApp** © 2025 - Projet académique développé par:
- NANKOULI Marc Thierry
- ELFILALI Halima
- CHAIBOU Abdoulaye  
-[Documentation complète](https://docscv.readthedocs.io/fr/latest/about/) | <!--[Rapport technique](docs/report.pdf) | [Présentation](docs/presentation.pptx) -->
+ - NANKOULI Marc Thierry
+ - ELFILALI Halima
+ - CHAIBOU Abdoulaye  
+[Documentation complète](https://docscv.readthedocs.io/fr/latest/) | <!--[Rapport technique](docs/report.pdf) | [Présentation](docs/presentation.pptx) -->
 
 
 
